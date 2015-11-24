@@ -15,6 +15,8 @@ When provisioning a server with environment variables add the environment variab
 
 ```
 
+### Why?
+
 ## Booleans
 
 There are many different ways to specify a boolean value in ansible, True/False, true/false, yes/no, 1/0. While it is cute to see all those options we prefer to stick to one : true/false. The main reasoning behind this is that java and javascript have similar designations for boolean values. 
