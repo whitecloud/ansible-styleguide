@@ -68,7 +68,7 @@ Use only one space after the colon when designating a key value pair
 ## Sudo
 Use the new become syntax when designating that a task needs to be run with sudo
 
-```
+```yaml
 #bad
 - name: template client.json to /etc/sensu/conf.d/
   template: src=client.json.j2 dest=/etc/sensu/conf.d/client.json
