@@ -1,8 +1,7 @@
 # Ansible Styleguide
 
-## Style
 
-### Environment 
+## Environment 
 
 When provisioning a server with environment variables add the environment variables to /etc/environment with lineinfile. Do this from the ansible role that is associated with the service or application that is being installed. For example for tomcat installation the CATALINA_HOME environment variable is often used to reference the folder that contains tomcat and its associated webapps. 
 
@@ -16,7 +15,7 @@ When provisioning a server with environment variables add the environment variab
 
 ```
 
-### Booleans
+## Booleans
 
 There are many different ways to specify a boolean value in ansible, True/False, true/false, yes/no, 1/0. While it is cute to see all those options we prefer to stick to one : true/false. The main reasoning behind this is that java and javascript have similar designations for boolean values. 
 
@@ -38,9 +37,9 @@ There are many different ways to specify a boolean value in ansible, True/False,
   become: true
 ```
 
-#### Why?
+### Why?
 
-### Colons maps and key value pairs
+## Colons maps and key value pairs
 
 Use only one space after the colon when designating a key value pair
 
@@ -62,7 +61,7 @@ Use only one space after the colon when designating a key value pair
     enabled: true
   become: true
 ```
-### Sudo
+## Sudo
 Use the new become syntax when designating that a task needs to be run with sudo
 
 ```
@@ -76,5 +75,5 @@ Use the new become syntax when designating that a task needs to be run with sudo
   template: src=client.json.j2 dest=/etc/sensu/conf.d/client.json
   become: true
 ```
-#### Why?
+### Why?
 > Because sudo was deprecated at version 1.9.1
