@@ -64,7 +64,45 @@ Use only one space after the colon when designating a key value pair
     enabled: true
   become: true
 ```
+
 ### Why?
+
+Use the map syntax when there are more than two key value pairs.
+
+```yaml
+# bad
+- name: create checks directory to make it easier to look at checks vs handlers
+  file: path=/etc/sensu/conf.d/checks state=directory mode=0755 owner=sensu group=sensu
+  become: true
+  
+- name: copy check-memory.json to /etc/sensu/conf.d
+copy: 
+  src: checks/check-memory.json 
+  dest: /etc/sensu/conf.d/checks/
+become: true
+  
+# good
+- name: create checks directory to make it easier to look at checks vs handlers
+  file:
+    path: /etc/sensu/conf.d/checks
+    state: directory
+    mode: 0755
+    owner: sensu
+    group: sensu
+  become: true
+  
+- name: copy check-memory.json to /etc/sensu/conf.d
+  copy: 
+    src=checks/check-memory.json 
+    dest=/etc/sensu/conf.d/checks/
+  become: true
+
+```
+
+### Why?
+
+> It's easier to read and it's not hard to do.
+> It reduces changset collisions for version control.
 
 ## Sudo
 Use the new become syntax when designating that a task needs to be run with sudo
