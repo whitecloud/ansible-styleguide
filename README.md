@@ -27,7 +27,6 @@ By default start your file with `---` to show that this is a yaml file.
 
 > Because it's easy and we often mix and match, just stick to one style.
 
-Because 
 
 ## Quotes
 
