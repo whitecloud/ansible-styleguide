@@ -1,5 +1,33 @@
 # Ansible Styleguide
 
+## Start of Files
+
+By default start your file with `---` to show that this is a yaml file. 
+
+```yaml
+#bad
+- name: start robot named S1m0ne
+  service:
+    name: s1m0ne
+    state: started
+    enabled: true
+  become: true
+  
+#good
+---
+- name: start robot named S1m0ne
+  service:
+    name: s1m0ne
+    state: started
+    enabled: true
+  become: true
+```
+
+### Why
+
+> Because it's easy and we often mix and match, just stick to one style.
+
+Because 
 
 ## Quotes
 
@@ -40,7 +68,8 @@
   with_items: robots
 ```
 ### Why?
-Even though strings are the default type for YAML, syntax highlighting looks better when explicitly set types. This also helps troubleshoot malformed strings when they should be properly escaped to have the desired effect.
+
+> Even though strings are the default type for YAML, syntax highlighting looks better when explicitly set types. This also helps troubleshoot malformed strings when they should be properly escaped to have the desired effect.
 
 ## Environment 
 
