@@ -47,7 +47,7 @@
 - hosts: 'tag_environment_samplefruit'
   remote_user: 'centos' # options in alphabetical order
   vars:
-    sample_str: 'dood'
+    sample_str: 'dood' # use snake_case for variable names
     sample_bool: true # don't quote booleans or integers
     sample_int: 420
   vars_files:
@@ -67,6 +67,14 @@
     - name: 'get list of directory permissions in /tmp'
       command: 'ls -l /tmp'
       register: tmp_listing # don't quote variable names when registering
+
+    # A task should be defined in the following order:
+    # name
+    # tags
+    # module
+    # module arguments, alphabetical
+    # loop operator (e.g. with_items, with_fileglob)
+    # other options, alphabetical (e.g. become, ignore_errors, when)
 
     - name: 'a more complicated task to show where everything goes: touch all items from /tmp'
       tags: 'debug' # tags go immediately after name
