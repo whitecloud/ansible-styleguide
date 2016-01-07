@@ -1,0 +1,98 @@
+# Example: ansible-playbook --ask-vault-pass -K style.yml
+#
+# This is a sample Ansible script to showcase all of our style decisions.
+# Pay close to attention to things like spacing, where we use quotes, etc.
+# The only thing you can ignore is where comments are, except this first comment.
+# It's generally a good idea to include some good information like sample usage
+# at the beginning of your file, so that someone can run head on the script
+# to see what they should do.
+#
+# A good rule of thumb on quoting is to quote anything that represents a value
+# that does not represent either a primitive type, or something within the
+# playbook; e.g. don't quote integers, booleans, variable names, boolean logic
+# Variable names still need to be quoted when they are module parameters for 
+# Ansible to properly resolve them.
+# You should also always have single quotes around the outer string, and 
+# double quotes on the inside.
+# If for some reason this isn't possible or it would require escaping quotes 
+# (which you should avoid if you can), use the scalar string operator (shown
+# in this playbook).
+#
+# Directory structure style:
+# Playbooks you actually run are in the root directory
+# Within this directory, separate directories for group_vars and roles exist.
+# Each role directory contains any of the following that are necessary:
+# files, meta, tasks, templates.
+# In tasks, the main.yml file contains only the following:
+#
+# ---
+# 
+# - include: 'role_name.yml'
+#
+# The self-named yml file contains all of the actual role tasks.
+#
+# Header comments are followed by blank line, then --- to signify start of YAML,
+# then another blank line, then the script.
+
+---
+
+- hosts: 'localhost'
+  tasks:
+    - name: 'fail if someone tries to run this'
+      fail:
+        msg: 'this playbook was not meant to actually be ran. just inspect the source!'
+
+- include: 'include.yml' # quote filenames
+
+- hosts: 'tag_environment_samplefruit'
+  remote_user: 'centos' # options in alphabetical order
+  vars:
+    sample_str: 'dood'
+    sample_bool: true # don't quote booleans or integers
+    sample_int: 420
+  vars_files:
+    - 'group_vars/secrets.yml'
+  pre_tasks: # then pre_tasks, roles, tasks
+    - name: 'this runs a command that involves both single and double quotes'
+      command: >
+        echo "I can't even"
+      args:
+        chdir: '/tmp'
+
+    - name: 'this command just involves double quotes'
+      command: 'echo "Hey man"'
+  roles:
+    - { role: 'sample_role', tags: 'sample_role' } # use this format for role listing
+  tasks:
+    - name: 'get list of directory permissions in /tmp'
+      command: 'ls -l /tmp'
+      register: tmp_listing # don't quote variable names when registering
+
+    - name: 'a more complicated task to show where everything goes: touch all items from /tmp'
+      tags: 'debug' # tags go immediately after name
+      file:
+        path: '{{ item }}' # use path for single file actions, dest/src for multi file actions
+        state: 'touch' # arguments go in alphabetical order
+      with_items: tmp_listing.stdout_lines # loop things go immediately after module
+      become: true # the rest of the task options are in alphabetical order
+      ignore_errors: true
+      when: ansible_os_family == 'Darwin' and tmp_listing.stdout_lines | length > 1
+
+    - name: 'some modules can have maps in their maps (woah man)'
+      ec2:
+        assign_public_ip: true
+        group: ['wca_ssh', 'wca_tomcat'] #TODO: is single-line array okay here?
+        image: 'ami-c7d092f7'
+        instance_tags:
+          Name: 'instance'
+          service_tomcat: ''
+        key_name: 'ops'
+
+- hosts: 'tag_environment_secondfruit'
+  tasks:
+    - name: 'this task has multiple tags'
+      tags: ['tagme', 'tagmetoo']
+      set_fact:
+        mr_fact: 'w'
+
+# newline at end of file
