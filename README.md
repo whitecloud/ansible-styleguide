@@ -93,7 +93,7 @@ When provisioning a server with environment variables add the environment variab
 ```
 
 ### Why?
-Environment definition files are typically shared so blowing them away by templating them can cause problems. Having the specific environment variable included by `lineinfile` makes it easier to track which applications are dependent upon it the environment variable.
+Environment definition files are typically shared so blowing them away by templating them can cause problems. Having the specific environment variable included by `lineinfile` makes it easier to track which applications are dependent upon the environment variable.
 
 ## Booleans
 
