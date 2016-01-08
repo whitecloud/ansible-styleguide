@@ -1,7 +1,7 @@
 # Example: ansible-playbook --ask-become-pass --ask-vault-pass style.yml
 #
 # This is a sample Ansible script to showcase all of our style decisions.
-# Pay close to attention to things like spacing, where we use quotes, etc.
+# Pay close attention to things like spacing, where we use quotes, etc.
 # The only thing you can ignore is where comments are, except this first comment:
 # It's generally a good idea to include some good information like sample usage
 # at the beginning of your file, so that someone can run head on the script
