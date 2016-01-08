@@ -19,11 +19,8 @@
 # in this playbook).
 #
 # Directory structure style:
-# Playbooks you actually run are in the root directory
-# Within this directory, separate directories for group_vars and roles exist.
-# Each role directory contains any of the following that are necessary:
-# files, meta, tasks, templates.
-# In tasks, the main.yml file contains only the following:
+# Your directory structure should match the structure described by the Ansible
+# developers: http://docs.ansible.com/ansible/playbooks_best_practices.html
 #
 # ---
 # 
