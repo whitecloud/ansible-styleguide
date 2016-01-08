@@ -1,5 +1,14 @@
 # Ansible Styleguide
 
+## Table of Contents
+  
+  1. [Start of Files](#start-of-files)
+  1. [Quotes](#quotes)
+  1. [Environment](#environment)
+  1. [Booleans](#booleans)
+  1. [Key value pairs](#key-value-pairs)
+  1. [Sudo](#sudo)
+
 ## Start of Files
 
 By default start your file with `---` to show that this is a yaml file. 
