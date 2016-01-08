@@ -2,7 +2,7 @@
 #
 # This is a sample Ansible script to showcase all of our style decisions.
 # Pay close to attention to things like spacing, where we use quotes, etc.
-# The only thing you can ignore is where comments are, except this first comment.
+# The only thing you can ignore is where comments are, except this first comment:
 # It's generally a good idea to include some good information like sample usage
 # at the beginning of your file, so that someone can run head on the script
 # to see what they should do.
@@ -42,7 +42,14 @@
       fail:
         msg: 'this playbook was not meant to actually be ran. just inspect the source!'
 
-- include: 'include.yml' # quote filenames
+- include: 'first_include.yml' # quote filenames
+- include: 'second_include.yml' # no blank line needed between includes without tags
+
+- include: 'third_include.yml' # includes with tags should have blank lines between
+  tags: 'third_include'
+
+- include: 'fourth_include.yml'
+  tags: 'fourth_include'
 
 - hosts: 'tag_environment_samplefruit'
   remote_user: 'centos' # options in alphabetical order
@@ -102,5 +109,9 @@
       tags: ['tagme', 'tagmetoo']
       set_fact:
         mr_fact: 'w'
+
+    - name: 'perform an action'
+      action: ec2_facts
+      delegate_to: 'localhost'
 
 # newline at end of file
