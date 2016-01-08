@@ -1,4 +1,4 @@
-# Example: ansible-playbook --ask-vault-pass -K style.yml
+# Example: ansible-playbook --ask-become-pass --ask-vault-pass style.yml
 #
 # This is a sample Ansible script to showcase all of our style decisions.
 # Pay close to attention to things like spacing, where we use quotes, etc.
@@ -28,6 +28,7 @@
 # ---
 # 
 # - include: 'role_name.yml'
+#   become: true # only if every task in the role requires super user
 #
 # The self-named yml file contains all of the actual role tasks.
 #
@@ -56,7 +57,7 @@
   vars:
     sample_str: 'dood' # use snake_case for variable names
     sample_bool: true # don't quote booleans or integers
-    sample_int: 420
+    sample_int: 42
   vars_files:
     - 'group_vars/secrets.yml'
   pre_tasks: # then pre_tasks, roles, tasks
@@ -89,7 +90,8 @@
         path: '{{ item }}' # use path for single file actions, dest/src for multi file actions
         state: 'touch' # arguments go in alphabetical order
       with_items: tmp_listing.stdout_lines # loop things go immediately after module
-      become: true # the rest of the task options are in alphabetical order
+      # the rest of the task options are in alphabetical order
+      become: true # try to keep become only on the tasks that need it. If every task in a host uses become, then move it up to the host options
       ignore_errors: true
       when: ansible_os_family == 'Darwin' and tmp_listing.stdout_lines | length > 1
 
