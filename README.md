@@ -15,20 +15,20 @@ By default start your file with `---` to show that this is a yaml file.
 
 ```yaml
 #bad
-- name: start robot named S1m0ne
+- name: 'start robot named S1m0ne'
   service:
-    name: s1m0ne
-    state: started
     enabled: true
+    name: 's1m0ne'
+    state: 'started'
   become: true
   
 #good
 ---
-- name: start robot named S1m0ne
+- name: 'start robot named S1m0ne'
   service:
-    name: s1m0ne
-    state: started
     enabled: true
+    name: 's1m0ne'
+    state: 'started'
   become: true
 ```
 
@@ -39,7 +39,7 @@ Because it's easy and we often mix and match, just stick to one style.
 
 ## Quotes
 
-**We always quote strings** and prefer single quotes over double quotes. The only time you should use double quotes is when there is a nested single quote (e.g. Jinja map reference). If you must write a long string, we use the "folded scalar" style and omit all special quoting.
+**We always quote strings** and prefer single quotes over double quotes. The only time you should use double quotes is when they are nested within single quotes (e.g. Jinja map reference), or when your string requires escaping characters (e.g. using "\n" to represent a newline). If you must write a long string, we use the "folded scalar" style and omit all special quoting. The only things you should avoid quoting are booleans (e.g. true/false) and numbers (e.g. 42).
 
 ```yaml
 # bad
@@ -61,11 +61,16 @@ Because it's easy and we often mix and match, just stick to one style.
 # double quotes w/ nested single quotes
 - name: 'start all robots'
   service:
-    name: "{{ item['robot_name'] }}"
+    name: '{{ item["robot_name"] }}''
     state: 'started'
     enabled: true
-  with_items: robots
+  with_items: '{{ robots }}'
   become: true
+
+# double quotes to escape characters
+- name 'print some text on two lines'
+  debug:
+    msg: "This text is on\ntwo lines"
 
 # folded scalar style
 - name: 'robot infos'
@@ -74,6 +79,20 @@ Because it's easy and we often mix and match, just stick to one style.
       Robot {{ item['robot_name'] }} is {{ item['status'] }} and in {{ item['az'] }}
       availability zone with a {{ item['curiosity_quotient'] }} curiosity quotient.
   with_items: robots
+
+# folded scalar when the string has nested quotes already
+- name: 'print some text'
+  debug:
+    msg: >
+      “I haven’t the slightest idea,” said the Hatter.
+
+# don't quote booleans/numbers
+- name: 'download google homepage'
+  get_url:
+    dest: '/tmp'
+    timeout: 60
+    url: 'https://google.com'
+    validate_certs: true
 ```
 ### Why?
 
@@ -141,7 +160,7 @@ Use only one space after the colon when designating a key value pair
   become: true
 ```
 
-Use the map syntax when there are more than two key value pairs.
+**Always use the map syntax,** regardless of how many pairs exist in the map.
 
 ```yaml
 # bad
@@ -150,23 +169,23 @@ Use the map syntax when there are more than two key value pairs.
   become: true
   
 - name: 'copy check-memory.json to /etc/sensu/conf.d'
-  copy: 
-    src: 'checks/check-memory.json'
-    dest: '/etc/sensu/conf.d/checks/'
+  copy: 'dest=/etc/sensu/conf.d/checks/ src=checks/check-memory.json'
   become: true
   
 # good
 - name: 'create checks directory to make it easier to look at checks vs handlers'
   file:
-    path: '/etc/sensu/conf.d/checks'
-    state: 'directory'
+    group: 'sensu'
     mode: '0755'
     owner: 'sensu'
-    group: 'sensu'
+    path: '/etc/sensu/conf.d/checks'
+    state: 'directory'
   become: true
   
 - name: 'copy check-memory.json to /etc/sensu/conf.d'
-  copy: 'src=checks/check-memory.json dest=/etc/sensu/conf.d/checks/'
+  copy:
+    dest: '/etc/sensu/conf.d/checks/'
+    src: 'checks/check-memory.json'
   become: true
 ```
 
@@ -179,12 +198,16 @@ Use the new `become` syntax when designating that a task needs to be run with `s
 ```yaml
 #bad
 - name: 'template client.json to /etc/sensu/conf.d/'
-  template: 'src=client.json.j2 dest=/etc/sensu/conf.d/client.json'
+  template:
+    dest: '/etc/sensu/conf.d/client.json'
+    src: 'client.json.j2'
   sudo: true
  
 # good
 - name: 'template client.json to /etc/sensu/conf.d/'
-  template: 'src=client.json.j2 dest=/etc/sensu/conf.d/client.json'
+  template:
+    dest: '/etc/sensu/conf.d/client.json'
+    src: 'client.json.j2'
   become: true
 ```
 ### Why?
