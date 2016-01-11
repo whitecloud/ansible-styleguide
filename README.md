@@ -112,7 +112,7 @@ When provisioning a server with environment variables add the environment variab
 ```
 
 ### Why?
-**TODO**
+Environment definition files are typically shared so blowing them away by templating them can cause problems. Having the specific environment variable included by `lineinfile` makes it easier to track which applications are dependent upon the environment variable.
 
 ## Booleans
 
@@ -190,6 +190,7 @@ Use only one space after the colon when designating a key value pair
 ```
 
 ### Why?
+
 It's easier to read and it's not hard to do. It reduces changset collisions for version control.
 
 ## Sudo
