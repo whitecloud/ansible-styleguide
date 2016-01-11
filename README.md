@@ -11,7 +11,7 @@
   1. [Key value pairs](#key-value-pairs)
   1. [Sudo](#sudo)
   1. [Hosts Declaration](#hosts-declaration)
-  1. [Task Declaration](#tasks-declaration)
+  1. [Task Declaration](#task-declaration)
   1. [Include Declaration](#include-declaration)
   1. [Spacing](#spacing)
 
