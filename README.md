@@ -289,6 +289,7 @@ Using `sudo` was deprecated at [Ansible version 1.9.1](http://docs.ansible.com/a
       service:
         name: 'tomcat'
         state: '{{ tomcat_state }}'
+```
 
 ### Why?
 
