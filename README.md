@@ -13,6 +13,7 @@
   1. [Hosts Declaration](#hosts-declaration)
   1. [Task Declaration](#task-declaration)
   1. [Include Declaration](#include-declaration)
+  1. [Role Declaration](#role-declaration)
   1. [Spacing](#spacing)
 
 ## Practices
@@ -350,6 +351,22 @@ For `include` statements, make sure to quote filenames and only use blank lines 
 ### Why?
 
 This tends to be the most readable way to have `include` statements in your code.
+
+## Role Declaration
+
+When defining a role, the `tasks/main.yml` file should only contain something like the following:
+
+```yaml
+---
+
+- include: 'role.yml'
+```
+
+Where `role.yml` has the same name as the role and contains all of the tasks involved in the role itself.
+
+### Why?
+
+When working in multi-file projects, having several `main.yml` files open at once can get very confusing. However, if every role file is named after itself, it's much easier to work with several files.
 
 ## Spacing
 
