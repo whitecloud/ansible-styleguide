@@ -146,7 +146,7 @@ Even though strings are the default type for YAML, syntax highlighting looks bet
 
 ## Environment 
 
-When provisioning a server with environment variables add the environment variables to `/etc/environment` with lineinfile. Do this from the ansible role that is associated with the service or application that is being installed. For example for tomcat installation the `CATALINA_HOME` environment variable is often used to reference the folder that contains tomcat and its associated webapps. 
+When provisioning a server with environment variables add the environment variables to `/etc/environment` with lineinfile. Do this from the ansible role that is associated with the service or application that is being installed. For example for Tomcat installation the `CATALINA_HOME` environment variable is often used to reference the folder that contains Tomcat and its associated webapps. 
 
 ```yaml
 - name: 'add line CATALINA_HOME to /etc/environment'
@@ -237,7 +237,7 @@ Use only one space after the colon when designating a key value pair
 
 ### Why?
 
-It's easier to read and it's not hard to do. It reduces changset collisions for version control.
+It's easier to read and it's not hard to do. It reduces changeset collisions for version control.
 
 ## Sudo
 Use the new `become` syntax when designating that a task needs to be run with `sudo` privileges
