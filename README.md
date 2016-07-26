@@ -201,7 +201,7 @@ Use only one space after the colon when designating a key value pair
 - name: 'start sensu-client'
   service:
     name: 'sensu-client'
-    state: 'restarted
+    state: 'restarted'
     enabled: true
   become: true
 ```
