@@ -18,7 +18,7 @@
 
 ## Practices
 
-You should follow the [Best Practices](http://docs.ansible.com/ansible/playbooks_best_practices.html) defined by the Ansible documentation when developing playbooks.
+You should follow the [Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html) defined by the Ansible documentation when developing playbooks.
 
 ### Why?
 
@@ -258,7 +258,7 @@ Use the new `become` syntax when designating that a task needs to be run with `s
   become: true
 ```
 ### Why?
-Using `sudo` was deprecated at [Ansible version 1.9.1](http://docs.ansible.com/ansible/become.html)
+Using `sudo` was deprecated at [Ansible version 1.9.1](https://docs.ansible.com/ansible/latest/user_guide/become.html)
 
 ## Hosts Declaration
 
