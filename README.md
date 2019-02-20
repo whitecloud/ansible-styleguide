@@ -29,7 +29,7 @@ The script examples are inconsistent in style throughout the Ansible documentati
 
 ## Start of Files
 
-You should start your scripts with some comments explaining what the script's purpose does (and an example usage, if necessary), followed by `---` with blank lines around it;, then followed by the rest of the script.
+You should start your scripts with some comments explaining what the script's purpose does (and an example usage, if necessary), followed by `---` with blank lines around it, then followed by the rest of the script.
 
 ```yaml
 #bad
@@ -145,7 +145,7 @@ Even though strings are the default type for YAML, syntax highlighting looks bet
 
 ## Environment 
 
-When provisioning a server with environment variables add the environment variables to `/etc/environment` with lineinfile. Do this from the ansible role that is associated with the service or application that is being installed. For example for Tomcat installation the `CATALINA_HOME` environment variable is often used to reference the folder that contains Tomcat and its associated webapps. 
+When provisioning a server with environment variables add the environment variables to `/etc/environment` with lineinfile. Do this from the ansible role that is associated with the service or application that is being installed. For example, for Tomcat installation the `CATALINA_HOME` environment variable is often used to reference the folder that contains Tomcat and its associated webapps. 
 
 ```yaml
 - name: 'add line CATALINA_HOME to /etc/environment'
