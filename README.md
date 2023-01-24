@@ -68,7 +68,7 @@ This is common Unix best practice, and avoids any prompt misalignment when print
 
 ## Quotes
 
-**We always quote strings** and prefer single quotes over double quotes. The only time you should use double quotes is when they are nested within single quotes (e.g. Jinja map reference), or when your string requires escaping characters (e.g. using "\n" to represent a newline). If you must write a long string, we use the "folded scalar" style and omit all special quoting. The only things you should avoid quoting are booleans (e.g. true/false), numbers (e.g. 42), and things referencing the local Ansible environemnt (e.g. boolean logic or names of variables we are assigning values to).
+**We always quote strings** and prefer single quotes over double quotes. The only time you should use double quotes is when they are nested within single quotes (e.g. Jinja map reference), or when your string requires escaping characters (e.g. using "\n" to represent a newline). If you must write a long string, we use the "folded scalar" style and omit all special quoting. The only things you should avoid quoting are booleans (e.g. true/false), numbers (e.g. 42), and things referencing the local Ansible environment (e.g. boolean logic or names of variables we are assigning values to).
 
 ```yaml
 # bad
