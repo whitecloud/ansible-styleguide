@@ -87,10 +87,10 @@ This is common Unix best practice, and avoids any prompt misalignment when print
     enabled: true
   become: true
 
-# double quotes w/ nested single quotes
+# single quotes w/ nested double quotes
 - name: 'start all robots'
   service:
-    name: '{{ item["robot_name"] }}''
+    name: '{{ item["robot_name"] }}'
     state: 'started'
     enabled: true
   with_items: '{{ robots }}'
